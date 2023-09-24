@@ -14,13 +14,20 @@ class WolfGoatCabbage(Problem):
     def result(self, state, action):
         #returns the new state reached from the given state 
         #and the given action. Assume that the action is valid.
+
         # new_state = state
-        new_state = frozenset(i for i in state if i not in action) | frozenset(i for i in action if i not in state)
-        # for i in action:
-        #     if i in new_state:
-        #         new_state.remove(i)     
-        #     else:
-        #         new_state.add(i)   
+        # new_state = frozenset(i for i in state if i not in action) | frozenset(i for i in action if i not in state)
+
+        new_state_elements = set()
+        for i in state:
+            if i not in action:
+                new_state_elements.add(i)
+        for i in action:
+            if i not in state:
+                new_state_elements.add(i)
+
+        new_state = frozenset(new_state_elements)
+       
         return new_state
 
     def actions(self, state):
