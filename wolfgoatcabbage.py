@@ -53,24 +53,44 @@ class WolfGoatCabbage(Problem):
         # if state == {'G', 'F'}:
         #     return [['F'], ['F', 'G']]
 
+        # if state == frozenset({'W', 'G', 'F', 'C'}):
+        #     return [['F', 'G']]
+        # if state == frozenset({'W', 'C'}):
+        #     return [['F', 'G'], ['F']]
+        # if state == frozenset({'W', 'C', 'F'}):
+        #     return [['F'], ['F', 'W'], ['F', 'C']]
+        # if state == frozenset({'C'}):
+        #     return [['F', 'W'], ['F', 'G']]
+        # if state == frozenset({'F', 'G', 'C'}):
+        #     return [['F', 'C'], ['F', 'G']]
+        # if state == frozenset({'W'}):
+        #     return [['F', 'G'], ['F', 'C']]
+        # if state == frozenset({'W', 'F', 'G'}):
+        #     return [['F', 'W'], ['F', 'G']]
+        # if state == frozenset({'G'}):
+        #     return [['F'], ['F', 'W'], ['F', 'C']]
+        # if state == frozenset({'G', 'F'}):
+        #     return [['F'], ['F', 'G']]
+
         if state == frozenset({'W', 'G', 'F', 'C'}):
-            return [['F', 'G']]
+            return [{'F', 'G'}]
         if state == frozenset({'W', 'C'}):
-            return [['F', 'G'], ['F']]
+            return [{'F', 'G'}, {'F'}]
         if state == frozenset({'W', 'C', 'F'}):
-            return [['F'], ['F', 'W'], ['F', 'C']]
+            return [{'F'}, {'F', 'W'}, {'F', 'C'}]
         if state == frozenset({'C'}):
-            return [['F', 'W'], ['F', 'G']]
+            return [{'F', 'W'}, {'F', 'G'}]
         if state == frozenset({'F', 'G', 'C'}):
-            return [['F', 'C'], ['F', 'G']]
+            return [{'F', 'C'}, {'F', 'G'}]
         if state == frozenset({'W'}):
-            return [['F', 'G'], ['F', 'C']]
+            return [{'F', 'G'}, {'F', 'C'}]
         if state == frozenset({'W', 'F', 'G'}):
-            return [['F', 'W'], ['F', 'G']]
+            return [{'F', 'W'}, {'F', 'G'}]
         if state == frozenset({'G'}):
-            return [['F'], ['F', 'W'], ['F', 'C']]
+            return [{'F'}, {'F', 'W'}, {'F', 'C'}]
         if state == frozenset({'G', 'F'}):
-            return [['F'], ['F', 'G']]
+            return [{'F'}, {'F', 'G'}]
+
         
         
 
