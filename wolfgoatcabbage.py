@@ -29,8 +29,10 @@ class WolfGoatCabbage(Problem):
         # returns a list of valid actions in the given state
 
         valid_actions = []
-        moves = [{'F'},{'F', 'W'},{'F', 'C'},{'F', 'G'}]
+        moves = [{'F'},{'F', 'G'},{'F', 'W'},{'F', 'C'}]
 
+        if state == self.initial:
+            return [{'F','G'}]
      
         for move in moves:            
             if 'F' not in state:
