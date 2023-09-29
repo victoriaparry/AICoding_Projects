@@ -3,7 +3,7 @@ from search import *
 class WolfGoatCabbage(Problem):
 
     #fix initial
-    def __init__(self, initial=frozenset({'F', 'G', 'W', 'C'}), goal = frozenset()):
+    def __init__(self, initial=frozenset({'F', 'G', 'W', 'C'}), goal = set()):
         """ Define goal state and initialize a problem """
         super().__init__(initial, goal)
 
@@ -15,84 +15,41 @@ class WolfGoatCabbage(Problem):
         #returns the new state reached from the given state 
         #and the given action. Assume that the action is valid.
 
-        # new_state = state
-        # new_state = frozenset(i for i in state if i not in action) | frozenset(i for i in action if i not in state)
+        new_state = state
+        
+        if 'F' in state:
+            new_state = new_state.difference(action)
+        elif 'F' not in state:
+            new_state = new_state.union(action)
 
-        new_state_elements = set()
-        for i in state:
-            if i not in action:
-                new_state_elements.add(i)
-        for i in action:
-            if i not in state:
-                new_state_elements.add(i)
-
-        new_state = frozenset(new_state_elements)
        
-        return new_state
+        return frozenset(new_state)
 
     def actions(self, state):
         # returns a list of valid actions in the given state
-        # possible_moves = [['F'], ['F','W'], ['F','G'], ['F','C']]
 
-        # if state == {'W', 'G', 'F', 'C'}:
-        #     return [['F', 'G']]
-        # if state == {'W', 'C'}:
-        #     return [['F', 'G'], ['F']]
-        # if state == {'W', 'C', 'F'}:
-        #     return [['F'], ['F', 'W'], ['F','C']]
-        # if state == {'C'}:
-        #     return [['F', 'W'], ['F','G']]
-        # if state == {'F', 'G', 'C'}:
-        #     return [['F', 'C'], ['F', 'G']]
-        # if state == {'W'}:
-        #     return[['F', 'G'], ['F', 'C']]
-        # if state == {'W', 'F', 'G'}:
-        #     return [['F', 'W'], ['F','G']]
-        # if state == {'G'}:
-        #     return [['F'], ['F', 'W'], ['F','C']]
-        # if state == {'G', 'F'}:
-        #     return [['F'], ['F', 'G']]
+        valid_actions = []
+        moves = [{'F'},{'F', 'W'},{'F', 'C'},{'F', 'G'}]
 
-        # if state == frozenset({'W', 'G', 'F', 'C'}):
-        #     return [['F', 'G']]
-        # if state == frozenset({'W', 'C'}):
-        #     return [['F', 'G'], ['F']]
-        # if state == frozenset({'W', 'C', 'F'}):
-        #     return [['F'], ['F', 'W'], ['F', 'C']]
-        # if state == frozenset({'C'}):
-        #     return [['F', 'W'], ['F', 'G']]
-        # if state == frozenset({'F', 'G', 'C'}):
-        #     return [['F', 'C'], ['F', 'G']]
-        # if state == frozenset({'W'}):
-        #     return [['F', 'G'], ['F', 'C']]
-        # if state == frozenset({'W', 'F', 'G'}):
-        #     return [['F', 'W'], ['F', 'G']]
-        # if state == frozenset({'G'}):
-        #     return [['F'], ['F', 'W'], ['F', 'C']]
-        # if state == frozenset({'G', 'F'}):
-        #     return [['F'], ['F', 'G']]
+     
+        for move in moves:            
+            if 'F' not in state:
+                if 'G' in state and 'C' in state and 'W' not in state:
+                    continue
+                if 'W' in state and 'G' in state and 'C' not in state:
+                    continue
+                if 'W' in state and 'G' in state and 'C' in state:
+                    continue
+                if 'C' in state and 'G' not in state and 'W' not in state:
+                    continue
+            if 'F' in state:
+                if 'W' in state and 'G' not in state and 'C' not in state:
+                    continue
+            valid_actions.append(move)
 
-        if state == frozenset({'W', 'G', 'F', 'C'}):
-            return [{'F', 'G'}]
-        if state == frozenset({'W', 'C'}):
-            return [{'F', 'G'}, {'F'}]
-        if state == frozenset({'W', 'C', 'F'}):
-            return [{'F'}, {'F', 'W'}, {'F', 'C'}]
-        if state == frozenset({'C'}):
-            return [{'F', 'W'}, {'F', 'G'}]
-        if state == frozenset({'F', 'G', 'C'}):
-            return [{'F', 'C'}, {'F', 'G'}]
-        if state == frozenset({'W'}):
-            return [{'F', 'G'}, {'F', 'C'}]
-        if state == frozenset({'W', 'F', 'G'}):
-            return [{'F', 'W'}, {'F', 'G'}]
-        if state == frozenset({'G'}):
-            return [{'F'}, {'F', 'W'}, {'F', 'C'}]
-        if state == frozenset({'G', 'F'}):
-            return [{'F'}, {'F', 'G'}]
 
-        
-        
+        return valid_actions        
+
 
 if __name__ == '__main__':
     wgc = WolfGoatCabbage()
