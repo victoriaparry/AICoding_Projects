@@ -32,7 +32,7 @@ class WolfGoatCabbage(Problem):
         moves = [{'F'},{'F', 'G'},{'F', 'W'},{'F', 'C'}]
 
         if state == self.initial:
-            return [{'F','G'}]
+            return [moves[1]]
      
         for move in moves:            
             if 'F' not in state:
