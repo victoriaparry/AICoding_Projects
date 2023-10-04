@@ -31,8 +31,6 @@ class WolfGoatCabbage(Problem):
         valid_actions = []
         moves = [{'F'},{'F', 'G'},{'F', 'W'},{'F', 'C'}]
 
-        if state == self.initial:
-            return [moves[1]]
      
         for move in moves:            
             if 'F' not in state:
@@ -42,10 +40,10 @@ class WolfGoatCabbage(Problem):
                     continue
                 if 'W' in state and 'G' in state and 'C' in state:
                     continue
-                if 'C' in state and 'G' not in state and 'W' not in state:
-                    continue
             if 'F' in state:
                 if 'W' in state and 'G' not in state and 'C' not in state:
+                    continue
+                if 'C' in state and 'G' not in state and 'W' not in state:
                     continue
             valid_actions.append(move)
 
