@@ -15,7 +15,7 @@ class WolfGoatCabbage(Problem):
         #returns the new state reached from the given state 
         #and the given action. Assume that the action is valid.
 
-        new_state = state
+        new_state = frozenset(state)
         
         if 'F' in state:
             new_state = new_state.difference(action)
@@ -29,24 +29,23 @@ class WolfGoatCabbage(Problem):
         # returns a list of valid actions in the given state
 
         valid_actions = []
-        moves = [{'F'},{'F', 'G'},{'F', 'W'},{'F', 'C'}]
-
+        moves = [{'F'},{'F', 'C'},{'F', 'W'},{'F', 'G'}]
      
-        for move in moves:            
-            if 'F' not in state:
-                if 'G' in state and 'C' in state and 'W' not in state:
+        for move in moves: 
+            new_state = self.result(state, move)           
+            if 'F' not in new_state:
+                if 'G' in new_state and 'C' in new_state and 'W' not in new_state:
                     continue
-                if 'W' in state and 'G' in state and 'C' not in state:
+                if 'W' in new_state and 'G' in new_state and 'C' not in new_state:
                     continue
-                if 'W' in state and 'G' in state and 'C' in state:
+                if 'W' in new_state and 'G' in new_state and 'C' in new_state:
                     continue
-            if 'F' in state:
-                if 'W' in state and 'G' not in state and 'C' not in state:
+            if 'F' in new_state:
+                if 'W' in new_state and 'G' not in new_state and 'C' not in new_state:
                     continue
-                if 'C' in state and 'G' not in state and 'W' not in state:
+                if 'C' in new_state and 'G' not in new_state and 'W' not in new_state:
                     continue
             valid_actions.append(move)
-
 
         return valid_actions        
 
