@@ -1,4 +1,4 @@
-# WGCF_Problem
+AI coding Projects
 
 create env: py -m venv env 
 activate: .\env\Scripts\activate
